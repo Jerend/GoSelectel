@@ -45,11 +45,11 @@ linters:
 
 ### 5. Запустите анализ
 
-# Запуск линтера без исправления ошибок
+## Запуск линтера без исправления ошибок
 ```bash
 golangci-lint run ./...
 ```
-# Запуск линтера с исправлением ошибок
+## Запуск линтера с исправлением ошибок
 ```bash
 golangci-lint run --fix ./...
 ```
@@ -60,26 +60,38 @@ golangci-lint run --fix ./...
 - Не-английские буквы → удаление
 - Чувствительные данные → замена на [change]
 
-# Примеры использования
-При запуске линтера на следующих командах:
-- slog.Info("user password: " + password)
-- slog.Debug("apiKey: " + apiKey)
-- slog.Info("token: " + token)
-Вывод без --fix:
-- potential sensitive data "password" is being logged directly
-- potential sensitive data "apiKey" is being logged directly
-- potential sensitive data "token" is being logged directly
-Вывод с помощью --fix:
-- slog.Info("user password: " + "[change]")
-- slog.Debug("apiKey: " + "[change]")
-- slog.Info("token: " + "[change]")
+## Примеры использования
+### При запуске линтера на следующих командах:
+```bash
+slog.Info("user password: " + password)
+slog.Debug("apiKey: " + apiKey)
+slog.Info("token: " + token)
+```
+### Вывод без --fix:
+```bash
+potential sensitive data "password" is being logged directly
+potential sensitive data "apiKey" is being logged directly
+potential sensitive data "token" is being logged directly
+```
+### Вывод с помощью --fix:
+```bash
+slog.Info("user password: " + "[change]")
+slog.Debug("apiKey: " + "[change]")
+slog.Info("token: " + "[change]")
+```
 
-При запуске линтера на следующих командах:
-- slog.Info("Starting server on port 8080")
-- slog.Error("Failed to connect to database")
-Вывод без --fix:
-- The message in the log starts with a capital letter, got "Starting server on port 8080"
-- The message in the log starts with a capital letter, got "Failed to connect to database"
-Вывод с помощью --fix:
-- slog.Info("starting server on port 8080")
-- slog.Error("failed to connect to database")
+### При запуске линтера на следующих командах:
+```bash
+slog.Info("Starting server on port 8080")
+slog.Error("Failed to connect to database")
+```
+### Вывод без --fix:
+```bash
+The message in the log starts with a capital letter, got "Starting server on port 8080"
+The message in the log starts with a capital letter, got "Failed to connect to database"
+```
+### Вывод с помощью --fix:
+```bash
+slog.Info("starting server on port 8080")
+slog.Error("failed to connect to database")
+```
